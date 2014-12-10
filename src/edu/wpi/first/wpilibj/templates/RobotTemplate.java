@@ -144,20 +144,6 @@ public class RobotTemplate extends SimpleRobot {
 
 
 
-            if (joystick1.getTrigger()) {                   
-                PIDencoder.setSetpoint(0 + shooterOffset);
-            }
-
-
-            if (lastTimePress == false && topswitch.get()) {
-                shooterOffset = worm.get();
-            }
-
-
-            lastTimePress = topswitch.get();
-
-
-
             if (shootstick.getRawButton(8)) {
                 elevator.set(shootstick.getY());    // Enables full control of motor binded to Y-axis of a Joystick
                 
@@ -262,13 +248,22 @@ public class RobotTemplate extends SimpleRobot {
     /**
      * This function is called once each time the robot enters test mode.
      */
-    public void test() {        // Test was used only to start the compressor to fill the airtank
+    public void test() {        // Test was used only to start the compressor and fill the airtank
         switchstate = 3;
         if (switchstate == 3) {
             compress.start();
         } else {
             compress.stop();
         }
+        /* This is a PID controller test
+         if (joystick1.getTrigger()) {                   
+            PIDencoder.setSetpoint(0 + shooterOffset);
+         }
+        if (lastTimePress == false && topswitch.get()) {
+            shooterOffset = worm.get();
+            
+        }
+        lastTimePress = topswitch.get(); */
 
     }
 }
